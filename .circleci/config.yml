@@ -5,20 +5,8 @@ jobs:
        - image: circleci/ruby:2.4.1-node-browsers
     steps:
       - checkout
-      - run:
-        name: install Re:VIEW
-        command: |
-          sudo gem install review
-      - run:
-        name: install textlint
-        command: |
-          sudo npm install -g textlint
-          sudo npm install -g textlint-rule-max-ten textlint-rule-spellcheck-tech-word textlint-rule-no-mix-dearu-desumasu
-      - run:
-        name: install awscli
-        command: |
-          sudo pip install awscli
-      - run:
-        name: build pdf
-        command: |
-          make pdf
+      - run: sudo gem install review
+      - run: sudo npm install -g textlint
+      - run: sudo npm install -g textlint-rule-max-ten textlint-rule-spellcheck-tech-word textlint-rule-no-mix-dearu-desumasu
+      - run: sudo pip install awscli
+      - run: make pdf
