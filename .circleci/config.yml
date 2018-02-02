@@ -2,11 +2,13 @@ version: 2
 jobs:
   build:
     docker:
-       - image: circleci/ruby:2.4.1-node-browsers
+       - image: circleci/ruby:2.4-node
+       - image: paperist/alpine-texlive-ja
     steps:
       - checkout
+      - run: sudo apt-get install python-dev python-pip
       - run: sudo gem install review
-      - run: sudo npm install -g textlint
-      - run: sudo npm install -g textlint-rule-max-ten textlint-rule-spellcheck-tech-word textlint-rule-no-mix-dearu-desumasu
+      - run: sudo npm install -g --unsafe-perm textlint
+      - run: sudo npm install -g --unsafe-perm textlint-rule-max-ten textlint-rule-spellcheck-tech-word textlint-rule-no-mix-dearu-desumasu
       - run: sudo pip install awscli
-      - run: make pdf
+      # - run: rake epub
