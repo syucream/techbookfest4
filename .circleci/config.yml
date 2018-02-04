@@ -2,13 +2,24 @@ version: 2
 jobs:
   build:
     docker:
-       - image: circleci/ruby:2.4-node
-       - image: paperist/alpine-texlive-ja
+      - image: vvakame/review
     steps:
       - checkout
-      - run: sudo apt-get install python-dev python-pip
-      - run: sudo gem install review
-      - run: sudo npm install -g --unsafe-perm textlint
-      - run: sudo npm install -g --unsafe-perm textlint-rule-max-ten textlint-rule-spellcheck-tech-word textlint-rule-no-mix-dearu-desumasu
-      - run: sudo pip install awscli
-      # - run: rake epub
+      - run:
+          name: Install textlint and rules
+          command: npm install -g --unsafe-perm textlint textlint-plugin-review textlint-rule-max-ten textlint-rule-spellcheck-tech-word textlint-rule-no-mix-dearu-desumasu
+      - run:
+          name: Lint text
+          command: textlint --plugin review --rule max-ten --rule no-mix-dearu-desumasu --rule spellcheck-tech-word **/*.re
+      - run:
+          name: Build pdf
+          command: rake clean pdf
+      - store_artifacts:
+          path: ./book.pdf
+          destination: book.pdf
+      - run:
+          name: Comment to PullRequest
+          command: |
+            ISSUE_NUM=`echo $CIRCLE_PULL_REQUEST | awk -F'/' '{print $7}'`; \
+            curl -X POST -d "{\"body\": \"Built pdf is here > $CIRCLE_BUILD_URL#artifacts/containers/$CIRCLE_NODE_INDEX\"}" \
+            "https://api.github.com/repos/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}/issues/${ISSUE_NUM}/comments?access_token=${GITHUB_ACCESS_TOKEN}"
