@@ -23,11 +23,11 @@ language: ja
 
 # 書名
 # 読みを入れる例 booktitle: {name: "Re:VIEW EPUBサンプル", file-as: "リビューイーパブサンプル"}
-booktitle: test
+booktitle: あかるいきんようび（仮）
 
 # 著者名。「, 」で区切って複数指定できる
 # 読みを入れる例 aut: [{name: "青木峰郎", file-as: "アオキミネロウ"}, {name: "武藤健志", file-as: "ムトウケンシ"}, {name: "高橋征義", file-as: "タカハシマサヨシ"}, {name: "角征典", file-as: "カドマサノリ"}]
-aut: ["syucream"]
+aut: ["@syu_cream", "@lunatic_star", "@kidmin", "@m_bird"]
 
 # 以下はオプション
 # 以下はオプション(autと同じように配列書式で複数指定可能)。
@@ -178,7 +178,7 @@ coverimage: cover.jpg
 #   latex: "listings"
 
 # カタログファイル名を指定する
-# catalogfile: catalog.yml
+catalogfile: catalog.yml
 
 # 1ページの行数文字数と1kbごとのページ数を用紙サイズで指定する(A5 or B5)。
 # page_metric: A5
