@@ -1,7 +1,10 @@
 PREDEF:
 
 CHAPS:
-  - syucream/airflow.re
+  - syucream.re
+  - hoshizuki.re
+  - kidmin.re
+  - m-bird.re
 
 APPENDIX:
 
