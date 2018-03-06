@@ -8,27 +8,33 @@
 == IOTA とは
 
 IOTA @<fn>{iota_official} は暗号通貨の一種であり、 IoT(Internet of Things) を支える基盤の一つを目指しています。
+ちなみにこの記事を執筆している 2018 年 3 月現在では、日本国内の主要な取引所では残念ながら IOTA の扱いはありません。
+もし IOTA を手早く手に入れたい場合は、国外の取引所を利用する必要があるでしょう。
+
+IOTA は Blockchain ではなく Tangle という DAG(Directed Acyclic Graph, 非循環有向グラフ) の仕組みによってトランザクションを管理します。
+（Tangle の詳細については後述します）
 暗号通貨と言われてすぐに思いつくのは BitCoin や Ethereum かと思いますが、 IOTA は主にこれらと比べて以下のような違いがあります。
 
-- Blockchain ではなく DAG によるトランザクション管理
+- スケーラブルで非中央集権なトランザクション管理
 - miner に支払う手数料が存在しない
 - MAM(Masked Authenticated Message) という閲覧者を絞ったメッセージを公開できる
 - 細かなトランザクション向き
 TODO: 他にも色々書けることがある
 
-より詳しく見ていってみましょう。
+以下ではこれらの特徴について詳しく見ていきます。
 
 //footnote[iota_official][IOTA 公式: https://iota.org/]
 
-=== Blockchain ではなく DAG によるトランザクション管理
+=== スケーラブルで非中央集権なトランザクション管理
 
-Blockchain ではトランザクションを鎖のように繋いで管理していきますが、 IOTA では DAG(Directed Acyclic Graph, 非循環有向グラフ) で表現されます。
-IOTA ではこの DAG として Tangle という仕組みを持っています。
+Blockchain と比較しての話ですが、 DAG によって細かくトランザクションが管理されることで、より並列にトランザクションの検証ができるようになり、スケーラブルであると言われています。
+また Blockchain ベースの暗号通貨によくある miner を必要としないのでより非中央集権的なネットワークであるといえます。
 
 TODO: もっと書く
 
 === miner に支払う手数料が存在しない
 
+これは IOTA の大きな特徴と言えるでしょう。
 BitCoin や Ethereum ではトランザクションを承認する miner に支払う手数料が発生しますが、 IOTA ではこれがありません。
 つまり手数料フリーです！ やったね！
 ただしこれを実現するために、トランザクションを送出したい人が他の 2 件以上のトランザクションを承認する必要があります。
@@ -56,9 +62,9 @@ TODO: ちゃんと思想や技術的背景を拾って書く
 == Tangle について
 
 IOTA の紹介の際に出てきた Tangle は、 IOTA を特徴付ける仕組みのひとつとも言えます。
-これについて細かく解説していきます。
-
 Tangle の white paper は公開されており、また有志により日本語訳も存在します。 @<fn>{tangle_wp} 
+
+Tangle では Blockchain のような、幾つかのトランザクションをブロック単位にまとめて繋いで行くのではなく、トランザクション間が細かく連結した有向グラフを描くような形で管理されます。
 
 TODO: もっと書く
 
@@ -70,7 +76,12 @@ TODO: もっと書く
 解説だけではいまいちピンとこない部分が多々あると思われます。
 ここでは実際に IOTA に触ってみましょう！
 
-=== IOTA スマホアプリを使ってみる
+=== IOTA Wallet を使ってみる
+
+IOTA を触ってみるには実際に IOTA の Wallet を使って送金などの操作をしてみるのが簡単でしょう。
+IOTA Wallet は GitHub でオープンソースソフトウェアとして公開されており、  @<fn>{iota_wallet} Release から インストーラを取得できます。
+
+//footnote[iota_wallet][IOTA Wallet: https://github.com/iotaledger/wallet/releases]
 
 TODO: もっと書く
 
