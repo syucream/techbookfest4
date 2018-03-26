@@ -148,9 +148,9 @@ IOTA は公式では JavaScript, Python, Java ライブラリを提供してい�
 
 `iota.lib.js` は npm などでインストール可能です。
 
-```
+//cmd{
 $ npm install iota.lib.js
-```
+//}
 
 1i の送金を行なう JavaScript のコードは例えば以下のように記述できます。
 ここで 送金時に付与するメッセージとして、 `sendTransfer()` に渡すパラメータに `message` というトライトエンコードされた文字列を埋め込んでみます。
@@ -159,7 +159,7 @@ $ npm install iota.lib.js
 どうしてもうまくいかない場合は幾つかのフルノードを試してみましょう。
 
 
-```js
+//listnum[transfer.js][送金コード][js]{
 let IOTA = require('iota.lib.js');
 
 const receiver_seeds = '<受取側の seed 値>';
@@ -189,13 +189,15 @@ iota.api.getNewAddress(receiver_seeds, (err, dest_addr) => {
           console.log('transfer done.');
     });
 });
-```
+//}
 
-ここで送信したトランザクションの情報を手軽に確認するには、 TheTangle という取引情報を閲覧できるサービスを用いるのが良いです。
+ここで送信したトランザクションの情報を手軽に確認するには、 TheTangle という取引情報を閲覧できるサービスを用いるのが良いです。 @<fn>{the_tangle} 
 以下のように送金先アドレスで検索を行うことで、上記で設定したメッセージやタグが送信出来ていることが確認できます。
 ちなみにここでタグの値として設定されている "HDTCGDHD9999999999999999999" は末尾が 9 fill された、 "test" がトライトエンコードされた値です。
 
 //image[syucream_iota_transaction][トランザクションの内容確認画面]
+
+//footnote[the_tangle][TheTangle.org: https://thetangle.org/]
 
 == おわりに
 
