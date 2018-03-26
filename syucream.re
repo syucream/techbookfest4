@@ -75,6 +75,8 @@ Tangle では Blockchain のような、幾つかのトランザクションを�
 
 //image[syucream_tangle][DAG によるトランザクション管理]
 
+// TODO tip の選定などについての記述を加える
+
 //footnote[tangle_wp][Tangle white paper: https://iotafan.jp/wp/iota-wp-jp/]
 
 
@@ -177,6 +179,7 @@ iota.api.getNewAddress(receiver_seeds, (err, dest_addr) => {
           'address': dest_addr,
           'value': 1,
           'message': iota.utils.toTrytes('test'),
+          'tag': iota.utils.toTrytes('test'),
         }
       ], (err, data) => {
           if (err) {
@@ -187,6 +190,12 @@ iota.api.getNewAddress(receiver_seeds, (err, dest_addr) => {
     });
 });
 ```
+
+ここで送信したトランザクションの情報を手軽に確認するには、 TheTangle という取引情報を閲覧できるサービスを用いるのが良いです。
+以下のように送金先アドレスで検索を行うことで、上記で設定したメッセージやタグが送信出来ていることが確認できます。
+ちなみにここでタグの値として設定されている "HDTCGDHD9999999999999999999" は末尾が 9 fill された、 "test" がトライトエンコードされた値です。
+
+//image[syucream_iota_transaction][トランザクションの内容確認画面]
 
 == おわりに
 
