@@ -127,10 +127,66 @@ IOTA Wallet にログインしたら、予め購入した IOTA を上記で生�
 
 //image[syucream_iota_transfer][IOTA 送金画面]
 
-=== IOTA ネットワークに参加してデータを送信してみる
+これだけで送金処理が行えます！
+前述の通り IOTA であればトランザクション手数料がかからないので、最小の送金単位である 1i 送金したとしてもそれがそのまま受取口座に届きます。
 
-TODO: なにかプログラムを書いて送金してみる MAM を使ってみたい
+なお IOTA の仕組みが発展途上なせいか、送金処理はペンディング状態から進まなくなる場合がしばしばあります。
+そういった場合には取引履歴から送金トランザクションのリアタッチを行ってみましょう。
 
+=== スクリプトから 送金やメッセージ送信をしてみる
+
+IOTA Wallet を使っただけでは技術的な面白味が感じられないでしょう。
+次は IOTA を使って送金やメッセージ送信をするスクリプトを書いてみましょう。
+
+IOTA は公式では JavaScript, Python, Java ライブラリを提供しています。 @<fn>{iota_libraries} 
+特に JavaScript 向けライブラリである `iota.lib.js` 開発が進んでいるようです。
+というわけで以下では JavaScript ライブラリを使って送金などの処理を実装してみます。
+
+//footnote[iota_libraries][IOTA Client Library: https://iota.readme.io/docs/overview]
+
+`iota.lib.js` は npm などでインストール可能です。
+
+```
+$ npm install iota.lib.js
+```
+
+1i の送金を行なう JavaScript のコードは例えば以下のように記述できます。
+ここで 送金時に付与するメッセージとして、 `sendTransfer()` に渡すパラメータに `message` というトライトエンコードされた文字列を埋め込んでみます。
+
+なお、筆者の試した限りだと provider として入力するフルノードは、場合によっては挙動が安定しない場合があります。
+どうしてもうまくいかない場合は幾つかのフルノードを試してみましょう。
+
+
+```js
+let IOTA = require('iota.lib.js');
+
+const receiver_seeds = '<受取側の seed 値>';
+const sender_seeds = '<送金側の seed 値>';
+
+let iota = new IOTA({
+    'provider': 'http://<フルノードの host/port>'
+});
+
+iota.api.getNewAddress(receiver_seeds, (err, dest_addr) => {
+    if (err) {
+      console.error(err);
+      return;
+    }
+    iota.api.sendTransfer(sender_seeds, 2, 14, [
+        {
+          'address': dest_addr,
+          'value': 1,
+          'message': iota.utils.toTrytes('test'),
+        }
+      ], (err, data) => {
+          if (err) {
+            console.error(err);
+            return;
+          }
+          console.log('transfer done.');
+    });
+});
+```
 
 == おわりに
 
