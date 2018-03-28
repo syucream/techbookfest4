@@ -27,20 +27,20 @@ IOTA は Blockchain ではなく Tangle という DAG(Directed Acyclic Graph, �
 
 これは IOTA の大きな特徴と言えるでしょう。
 BitCoin や Ethereum ではトランザクションを承認する miner (採掘する人)に支払う手数料が発生しますが、 IOTA ではこれがありません。
-ただしこれを実現するために、トランザクションを送出したい人が他の 2 件以上のトランザクションを承認する必要があります。
-つまるところ、 miner の仕事を自分でやることで手数料の発生、というか miner という概念を除去しているわけです。
+BitCoin などで送金しようとした際に、場合によってはこの手数料が送信金額を上回る可能性も考えられますし、あまり気軽に送金処理が行えなくなる場合が考えられます。
 
 トランザクション手数料が無料であることは、 IOTA の仕組みで送金以外の意図をもたらすのにも使えるかも知れません。
 例えば 1i(IOTA の最小貨幣単位) を送る毎に何らかのカウンタをインクリメントしたことに見立てるなど。
 BitCoin など他通貨でも同じことは可能ですが、手数料の有無は運用し続ける上でやはり気になってくる点だと思われます。
 
-なお、他のトランザクションを承認する上で BitCoin などと自分でプルーフオブワークすることになります。
-この処理はそれなりにマシンパワーを必要とするのでそれを念頭に置く必要があるのと、 IoT デバイスで送金する場合にはタイミングの調整などを気にする必要が出て来るかも知れません。
 
 === MAM(Masked Authenticated Message) という閲覧者を絞ったメッセージを公開できる
 
 MAM は IOTA のトランザクションのメッセージを暗号化し、閲覧者を絞ってそのメッセージを複合可能にする仕組みです。
 暗号通貨のトランザクションというと公開されているイメージが思いますが、 IOTA ではこの仕組みによって機密性が高い情報もやり取りすることが可能です。
+
+// TODO もう少し記述を増やす
+
 MAM についての解説は日本コミュニティの解説記事 @<fn>{mam} が丁寧に記述されており、取っ付きやすいものかと思われます。
 
 //footnote[mam][MAM: https://iotafan.jp/developer/deep_drive_into_mam_20171229/]
@@ -75,7 +75,11 @@ Tangle では Blockchain のような、幾つかのトランザクションを�
 
 //image[syucream_tangle][DAG によるトランザクション管理]
 
-// TODO tip の選定などについての記述を加える
+IOTA の Tangle では、新しいトランザクションを送出したい人が他の 2 件以上のトランザクションを承認する必要があります。
+前に触れた手数料無料の理由はこれで、 miner の仕事を自分でやることで手数料の発生を除去しているのです。
+
+なお、他のトランザクションを承認する上で BitCoin などと自分でプルーフオブワークすることになります。
+この処理はそれなりにマシンパワーを必要とするのでそれを念頭に置く必要があるのと、 IoT デバイスで送金する場合にはタイミングの調整などを気にする必要が出て来るかも知れません。
 
 //footnote[tangle_wp][Tangle white paper: https://iotafan.jp/wp/iota-wp-jp/]
 
@@ -113,10 +117,10 @@ Binance では現在、日本円で直接取り引きを行なうことができ
 IOTA Wallet を用いる上で、自前のアカウントを生成しておくと良いでしょう。
 IOTA のシード値は特殊なトライトを用いることになります。以下のワンライナーでランダムな値を生成しておくと良いです。
 
-```
+//cmd{
 # Linux を想定
 $ cat /dev/urandom |tr -dc A-Z9|head -c${1:-81}
-```
+//}
 
 IOTA Wallet にログインしたら、予め購入した IOTA を上記で生成したシード値に対応した送金用アドレスに対して送金しておきましょう。
 以下のように受取画面から送金用アドレスを取得し、暗号通貨交換所の送金先にそれを設定して送金します。
@@ -141,7 +145,7 @@ IOTA Wallet を使っただけでは技術的な面白味が感じられない�
 次は IOTA を使って送金やメッセージ送信をするスクリプトを書いてみましょう。
 
 IOTA は公式では JavaScript, Python, Java ライブラリを提供しています。 @<fn>{iota_libraries} 
-特に JavaScript 向けライブラリである `iota.lib.js` 開発が進んでいるようです。
+特に JavaScript 向けライブラリである `iota.lib.js`  @<fn>{iota.lib.js} 開発が進んでいるようです。
 というわけで以下では JavaScript ライブラリを使って送金などの処理を実装してみます。
 
 //footnote[iota_libraries][IOTA Client Library: https://iota.readme.io/docs/overview]
@@ -154,6 +158,7 @@ $ npm install iota.lib.js
 
 1i の送金を行なう JavaScript のコードは例えば以下のように記述できます。
 ここで 送金時に付与するメッセージとして、 `sendTransfer()` に渡すパラメータに `message` というトライトエンコードされた文字列を埋め込んでみます。
+ちなみに執筆現在では IOTA Wallet で送金する分には最低でも 1i 以上の金額を送らなければバリデーションで弾かれてしまうのですが、このスクリプトで送金する文には 0i でも実行できます。
 
 なお、筆者の試した限りだと provider として入力するフルノードは、場合によっては挙動が安定しない場合があります。
 どうしてもうまくいかない場合は幾つかのフルノードを試してみましょう。
@@ -197,9 +202,79 @@ iota.api.getNewAddress(receiver_seeds, (err, dest_addr) => {
 
 //image[syucream_iota_transaction][トランザクションの内容確認画面]
 
-// TODO MAM を使ったサンプルコードを書いてみる
+次に、前述の MAM を送出するスクリプトを実行してみましょう。
+MAM の送信ロジックは JavaScript 向けでは iota.lib.js とは別のモジュールである mam.client.js  @<fn>{mam.client.js} にまとめられています。
+MAM の IOTA 公式実装は Rust で書かれていて、 @<fn>{MAM} mam.client.js はそれの JavaScript バインディングを提供している形になります。
+
+さて mam.client.js ですが、こちらは npm でコマンド一発でいい感じに導入できるようには現状なっていないようです。
+README の記述に従って環境を整えてみましょう。
+
+//cmd{
+$ git clone --depth 1 https://github.com/iotaledger/mam.client.js.git
+$ cd mam.client.js/
+$ yarn
+$ git submodule update --init --recursive
+//}
+
+実際に mam.client.js を使って MAM でメッセージを送信するコードの例を以下に示します。
+このコードでは任意のテキストを MAM の送信ポリシーである public, restricted, private のいずれかに基づいて送信することができます。
+今回は送信後の MAM をすぐに fetch して読み出してみてもいます。
+
+面白いのは restricted モードでの振る舞いでしょうか。
+ここでは secret_tryte 変数が示すシークレットがあれば fetch する側がメッセージを読める様になっています。
+メッセージを読み出したい人たちにのみ secret_tryte を渡しておくことで、その人達向け限定のメッセージ送信が可能になります。
+これを用いることで例えば貴重なデータを restricted モードで送信しまくっておいて、それを読みたい人が secret_tryte を購入して読み出すなんて購読モデルが構築できるかも知れません。
+
+//listnum[mam.js][MAM 送信コード][js]{
+let IOTA = require('iota.lib.js');
+let Mam = require('./lib/mam.node.js');
+
+const secret_tryte = 'EVERYDAYFRIDAY';
+
+if (process.argv.length != 4) {
+  console.log('Usage: node mam.js <\'message\'> <public|restricted|private>');
+  process.exit();
+}
+let msg = process.argv[2];
+let mode = process.argv[3];
+
+if (['public', 'restricted', 'private'].indexOf(mode) == -1) {
+  console.log('specify an appropriate mode');
+  process.exit();
+}
+
+let iota = new IOTA({
+    'provider': 'http://<フルノードの host/port>'
+});
+let mamState = Mam.init(iota);
+mamState = Mam.changeMode(
+  mamState,
+  mode,
+  (mode == 'restricted') ? secret_tryte : null
+);
+
+const publish_fetch = async packet => {
+  let message = Mam.create(mamState, packet);
+  console.log('Message Root: ', message.root);
+  console.log('Message Address: ', message.address);
+  mamState = message.state;
+  await Mam.attach(message.payload, message.address);
+
+  await Mam.fetch(
+    message.root,
+    mode,
+    (mode == 'restricted') ? secret_tryte : null,
+    console.log
+  );
+};
+
+publish_fetch(msg);
+//}
 
 //footnote[the_tangle][TheTangle.org: https://thetangle.org/]
+//footnote[iota.lib.js][iota.lib.js: https://github.com/iotaledger/iota.lib.js]
+//footnote[mam.client.js][mam.client.js: https://github.com/iotaledger/mam.client.js]
+//footnote[MAM][MAM: https://github.com/iotaledger/MAM]
 
 
 == おわりに
