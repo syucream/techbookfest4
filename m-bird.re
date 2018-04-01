@@ -83,6 +83,9 @@ DNS、ドメインネームシステム。たった一つの「ドメイン名�
 //image[m-bird_domain-name][ドメイン名の構造][scale=0.4]
 
 例として、@<code>{www.example.co.jp}をみてみましょう。
+この場合、@<code>{jp}がトップレベルドメイン名、@<code>{example}がセカンドレベルドメイン名、
+@<code>{www}がサードレベルドメイン名です。
+また、@<img>{m-bird_dns-all}をみると、@<code>{jp}と@<code>{example}の区切りで委任されていることが分かります。
 
 #@# * ツリー構造
 #@# * 階層構造と一致するような形になっている
