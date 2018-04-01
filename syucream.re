@@ -14,10 +14,10 @@ IOTA @<fn>{iota_official} は暗号通貨の一種であり、 IoT(Internet of T
 IOTA はブロックチェインではなく Tangle という DAG(Directed Acyclic Graph, 非循環有向グラフ) の仕組みによってトランザクションを管理します。
 暗号通貨と言われてすぐに思いつくのは BitCoin や Ethereum かと思いますが、 IOTA は主にこれらと比べて以下のような違いがあります。
 
-- トランザクション手数料がかからない
-- MAM(Masked Authenticated Message) という閲覧者を絞ったメッセージを公開できる
-- スケーラブルで非中央集権なトランザクション管理
-- 細かなトランザクション向き
+ * トランザクション手数料がかからない
+ * MAM(Masked Authenticated Message) という閲覧者を絞ったメッセージを公開できる
+ * スケーラブルで非中央集権なトランザクション管理
+ * 細かなトランザクション向き
 
 以下ではこれらの特徴について詳しく見ていきます。
 
