@@ -7,10 +7,10 @@ jobs:
       - checkout
       - run:
           name: Install textlint and rules
-          command: npm install -g --unsafe-perm textlint textlint-plugin-review textlint-rule-max-ten textlint-rule-spellcheck-tech-word textlint-rule-no-mix-dearu-desumasu
+          command: npm install -g --unsafe-perm textlint textlint-plugin-review textlint-filter-rule-comments textlint-rule-spellcheck-tech-word textlint-rule-no-mix-dearu-desumasu
       - run:
           name: Lint text
-          command: textlint --plugin review --rule no-mix-dearu-desumasu --rule spellcheck-tech-word **/*.re
+          command: textlint **/*.re
       - run:
           name: Build pdf
           command: rake clean pdf
