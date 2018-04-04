@@ -38,7 +38,7 @@
 
 ルートゾーンの管理に関するポリシーの策定は@<kw>{ICANN, Internet Corporation for Assigned Names and Numbers}によって行われています。実際の運用は@<kw>{IANA機能運用者, IANA Functions Operator}として選ばれた@<kw>{PTI, Public Technical Identifiers}が行っています。
 
-ルートゾーンをサービスする権威DNSサーバー（本稿執筆時点では@<tt>{[a-m].root-servers.net}）のことを、@<kw>{ルートサーバー, root servers}または@<kw>{ルートDNSサーバー}と呼びます。ルートDNSサーバーは、IANAが管理するルートゾーンを持ち、複数のオペレーターによって運用されています。詳しくは、@<tt>{http://www.root-servers.org/}を参照して下さい。
+ルートゾーンをサービスする権威DNSサーバー（本稿執筆時点では@<tt>{[a-m].root-servers.net}）のことを、@<kw>{ルートサーバー, root servers}または@<kw>{ルートDNSサーバー}と呼びます。ルートDNSサーバーは、IANAが管理する真正なルートゾーンをインターネットに提供する役割を持っており、複数のオペレーターによって運用されています。詳しくは、@<tt>{http://www.root-servers.org/}を参照して下さい。
 
 ===[column] ツリーの「ルート」はただ1つ
 
