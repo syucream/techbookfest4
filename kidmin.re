@@ -274,11 +274,14 @@ IPv6アドレスの逆引きについて、昔は@<tt>{ip6.int}というゾー�
 
 @<tt>{CNAME}レコードの指す先は、存在するドメイン名でなければなりません。では、そのドメイン名に@<tt>{CNAME}レコードが記載されている場合、どうなるのでしょうか。RFCでは、このような複数段の@<tt>{CNAME}チェインを許容しています。CDNサービスを利用しているWebサイトのドメイン名で、よく見かける構成です。
 
-ただし、複数段の@<tt>{CNAME}チェインを作る場合には注意が必要です。たとえば、@<tt>{a.example.com}の@<tt>{CNAME}レコードの指す先に@<tt>{b.example.com}を、逆に@<tt>{b.example.com}の@<tt>{CNAME}レコードの指す先に@<tt>{a.example.com}を指定すると、@<tt>{CNAME}チェインのループができてしまいます。フルリゾルバーがこのドメイン名を名前解決しようとすると、無限ループに陥ってしまうでしょう。この対策として、多くの実装では@<tt>{CNAME}をたどる回数に制限を設けています。たとえば、Unboundでは8段までに制限されています。
+ただし、複数段の@<tt>{CNAME}チェインを作る場合には注意が必要です。たとえば、@<tt>{a.example.com}の@<tt>{CNAME}レコードの指す先に@<tt>{b.example.com}を、逆に@<tt>{b.example.com}の@<tt>{CNAME}レコードの指す先に@<tt>{a.example.com}を指定すると、@<tt>{CNAME}チェインのループができてしまいます。フルリゾルバーがこのドメイン名を名前解決しようとすると、無限ループに陥ってしまうでしょう。この対策として、多くの実装では@<tt>{CNAME}をたどる回数に制限を設けています。たとえば、Unbound@<fn>{unbound}では8段までに制限されています@<fn>{unbound-max-restart-count}。
 
 複数段の@<tt>{CNAME}チェインはRFCで許容されているものの、ループの問題や、フルリゾルバーでの名前解決の手間が増えることを考えると、多くとも2〜3段くらいにとどめておくのがよいでしょう。
 
 本節では説明しませんが、特定のドメイン名以下のサブツリーをまるごと別のサブツリーにリダイレクトする@<tt>{DNAME}レコードも定義されています。
+
+//footnote[unbound][@<tt>{https://www.unbound.net/}]
+//footnote[unbound-max-restart-count][@<tt>{https://github.com/NLnetLabs/unbound/blob/release-1.7.0/iterator/iterator.h#L59}]
 
 == あとがき
 
