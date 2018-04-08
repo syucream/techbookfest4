@@ -71,7 +71,7 @@ MD5 とか SHA-1、SHA-256 など、名前だけは聞いたことがあるの�
 
 == ブロックチェインの基礎理論
 
-ここからは、@<fn>{Bitcoin の元論文}、サトシ・ナカモト氏の論文を簡単になぞります。
+ここからは、Bitcoin の元論文@<fn>{bitcoin_paper}、サトシ・ナカモト氏の論文を簡単になぞります。
 
 //footnote[bitcoin_paper][Bitcoin Wiki で公開されています：https://bitcoin.org/bitcoin.pdf]
 
