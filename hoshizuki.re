@@ -73,7 +73,7 @@ MD5 とか SHA-1、SHA-256 など、名前だけは聞いたことがあるの�
 
 ここからは、@<fn>{Bitcoin の元論文}、サトシ・ナカモト氏の論文を簡単になぞります。
 
-//footnote[bitcoin_paper][Bitcoin wiki で公開されています：https://bitcoin.org/bitcoin.pdf]
+//footnote[bitcoin_paper][Bitcoin Wiki で公開されています：https://bitcoin.org/bitcoin.pdf]
 
 「新しい持ち主の公開鍵」を「今の持ち主が署名」することで、
 所有権の移転とみなします。とりあえず今のところは「何の所有権？」とは明示しません。
