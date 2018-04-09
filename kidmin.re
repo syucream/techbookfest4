@@ -164,8 +164,8 @@ DNSは、分散型データベースに例えられることがあります。�
 
 実際にツリーをたどって見てみましょう。まずは、ルートサーバーの1つである@<tt>{a.root-servers.net}に問い合わせてみます。
 
-//list[StateCaUsFromRoot][a.root-servers.netへの問い合わせ]{
-$ dig +norec -t A www.state.ca.us @a.root-servers.net
+//cmd[a.root-servers.netへの問い合わせ]{
+$ @<b>{dig +norec -t A www.state.ca.us @a.root-servers.net}
 
 ; <<>> DiG 9.8.3-P1 <<>> +norec -t A www.state.ca.us @a.root-servers.net
 ;; global options: +cmd
@@ -189,8 +189,8 @@ us.			172800	IN	NS	k.cctld.us.
 
 @<tt>{AA}ビットがオフ、@<tt>{status}が@<tt>{NOERROR}で、@<tt>{ANSWER}セクションが空であることから、問い合わせたドメイン名に関する情報は委任先のゾーンに存在することを表しています。それでは、委任先である@<tt>{us}ゾーンを持つ権威DNSサーバーの1つ@<tt>{a.cctld.us}に改めて同じ内容を問い合わせてみましょう。
 
-//list[StateCaUsFromCctldUs][a.cctld.usへの問い合わせ]{
-$ dig +norec -t A www.state.ca.us @a.cctld.us
+//cmd[a.cctld.usへの問い合わせ]{
+$ @<b>{dig +norec -t A www.state.ca.us @a.cctld.us}
 
 ; <<>> DiG 9.8.3-P1 <<>> +norec -t A www.state.ca.us @a.cctld.us
 ;; global options: +cmd
