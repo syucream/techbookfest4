@@ -25,9 +25,9 @@
 具体的には、@<kw>{ルートヒント, root hints}と呼ばれる下記の情報を持っています。これらは、ルートゾーン自身にも含まれています。
 
  * ルートゾーンのNSレコード
- ** つまり、ルートDNSサーバーのホスト名
+ ** つまり、ルートサーバーのホスト名
  * 上記ホストの@<tt>{A}レコードおよび@<tt>{AAAA}レコード
- ** つまり、ルートDNSサーバーのIPv4・IPv6アドレス
+ ** つまり、ルートサーバーのIPv4・IPv6アドレス
 
 フルリゾルバーは、このルートヒントの情報とともに配布されています@<fn>{howto-get-latest-root-hints}。ルートヒントに記載されているサーバーを起点に、ドメイン名空間のツリーをルートからたどって、名前解決を行っています。
 
@@ -35,7 +35,7 @@
 
 ルートゾーンの管理に関するポリシーの策定は@<kw>{ICANN, Internet Corporation for Assigned Names and Numbers}によって行われています。実際の運用は@<kw>{IANA機能運用者, IANA Functions Operator}として選ばれた@<kw>{PTI, Public Technical Identifiers}が行っています。
 
-ルートゾーンをサービスする権威DNSサーバー（本稿執筆時点では@<tt>{[a-m].root-servers.net}）のことを、@<kw>{ルートサーバー, root servers}または@<kw>{ルートDNSサーバー}と呼びます。ルートDNSサーバーは、IANAが管理する真正なルートゾーンをインターネットに提供する役割を持っており、複数のオペレーターによって運用されています。詳しくは、@<tt>{http://www.root-servers.org/}を参照して下さい。
+ルートゾーンをサービスする権威DNSサーバー（本稿執筆時点では@<tt>{[a-m].root-servers.net}）のことを、@<kw>{ルートサーバー, root servers}または@<kw>{ルートDNSサーバー}と呼びます。ルートサーバーは、IANAが管理する真正なルートゾーンをインターネットに提供する役割を持っており、複数のオペレーターによって運用されています。詳しくは、@<tt>{http://www.root-servers.org/}を参照して下さい。
 
 ===[column] ツリーの「ルート」はただ1つ
 
@@ -152,7 +152,7 @@ DNSは、分散型データベースに例えられることがあります。�
 
 たとえば、アメリカ・カリフォルニア州のWebサイトである@<tt>{www.state.ca.us}について見てみます。このドメイン名は、カリフォルニア州政府によって登録されている@<tt>{state.ca.us}ゾーンに記載されています。では、@<tt>{state.ca.us}ゾーンは@<tt>{ca.us}ゾーンから委任されているのかというと、実はそうではなく、@<tt>{us}ゾーンから直接委任されているのです。つまり、@<tt>{ca.us}ゾーンは存在していません。
 
-実際にツリーをたどって見てみましょう。まずは、ルートDNSサーバーの1つである@<tt>{a.root-servers.net}に問い合わせてみます。
+実際にツリーをたどって見てみましょう。まずは、ルートサーバーの1つである@<tt>{a.root-servers.net}に問い合わせてみます。
 
 //list[StateCaUsFromRoot][a.root-servers.netへの問い合わせ]{
 $ dig +norec -t A www.state.ca.us @a.root-servers.net
