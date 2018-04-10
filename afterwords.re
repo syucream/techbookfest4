@@ -43,4 +43,4 @@ IOTA というまだまだマイナーな暗号通貨の記事を執筆しまし
 執筆陣一同、励みになります。
 （以下の QR コードからもフィードバック用フォームを開くことができます)
 
-//image[qr_feedbackform][フィードバックフォーム用 QR コード]
+//indepimage[qr_feedbackform]
