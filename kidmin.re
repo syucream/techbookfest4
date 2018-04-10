@@ -89,6 +89,11 @@ sub      IN  NS    ns2.example.net.
 ns1.sub  IN  A     192.0.2.53            ;; グルーレコード（後述）
 ns1.sub  IN  AAAA  2001:db8:beef::1:53   ;; グルーレコード（後述）
 //}
+
+//blankline
+//blankline
+#@# 調整
+
 //list[DelegationExampleChildSide][sub.example.comゾーン（委任される側）]{
 $ORIGIN sub.example.com.
 @    IN  SOA   ...                   ;; ゾーンの頂点に必要な情報（省略）
@@ -285,6 +290,7 @@ DNSでは、このエイリアスの仕組みが用意されています。そ�
 @<tt>{CNAME}レコードには、特有の注意点があります。それは、他のタイプのレコードと共存できない@<fn>{cname-exception-dnssec}ことです。
 つまり、@<tt>{CNAME}レコードが存在するドメイン名には、他のタイプのレコード（@<tt>{A}レコードや@<tt>{AAAA}レコードなど）を書くことはできません。
 これは、別名を表すという特徴によるものです。もし、@<tt>{CNAME}レコードが存在するドメイン名に@<tt>{A}レコードも書いてあった場合、名前解決の結果としては、そのレコードを返すべきなのか、「本名」のほうに書いてあるレコードを返すべきなのか、曖昧になってしまうでしょう。
+
 
 //list[BADExampleAnotherRRAtAlias][悪い例: 他のタイプのレコードが書いてある]{
 $ORIGIN example.com.
