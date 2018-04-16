@@ -12,8 +12,8 @@ jobs:
           name: Lint text
           command: textlint **/*.re
       - run:
-          name: Build pdf
-          command: rake clean pdf
+          name: Build pdf and epub
+          command: rake clean pdf epub
       - store_artifacts:
           path: ./book.pdf
           destination: book.pdf
