@@ -150,7 +150,7 @@ coverimage: cover.png
 # colophon: null
 
 # 裏表紙ファイル (画像はcoversまたはimagesに配置する)。ファイル名を指定すると裏表紙として入る
-backcover: images/backcover.png
+# backcover: images/backcover.png
 
 # プロフィールページファイル。ファイル名を指定すると著者紹介として入る
 # profile: null
