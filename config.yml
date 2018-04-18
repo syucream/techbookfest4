@@ -167,7 +167,7 @@ secnolevel: 2
 # fontdir: fonts
 
 # imagedir内から取り込まれる対象となるファイル拡張子。省略した場合は以下
-# image_ext: ["png", "gif", "jpg", "jpeg", "svg", "ttf", "woff", "otf"]
+image_ext: ["png", "gif", "jpg", "jpeg", "ttf", "woff", "otf"]
 
 # fontdir内から取り込まれる対象となるファイル拡張子。省略した場合は以下
 # font_ext: ["ttf", "woff", "otf"]
