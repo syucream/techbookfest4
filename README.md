@@ -1,6 +1,6 @@
 # techbookfest4
 
-[WIP] A thin book for techbookfest4
+A thin book for techbookfest4
 
 ## Quickstart
 
